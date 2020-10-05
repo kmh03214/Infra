@@ -35,7 +35,8 @@ Container를 위한 Open Source Orchestration System
 <img src = 'img/01 kube/img4.png'></img>
 - Kube Arch.  
     Master Worker 구조  
-    - Master : Cluster 라고함 Control Plan  
+    - Master  
+    Cluster 라고함 Control Plan  
         - API Server  
         쿠버네티스 클러스터 안에있는 모든 component의 허브역할 / Restful API제공으로 각각이랑 통신 가능 
         - Controller Manager (kube controller)  
@@ -46,7 +47,7 @@ Container를 위한 Open Source Orchestration System
         - etcd
         저장소역할, 따로 구성한 클러스터 백업 / 복구를 해야할 때 사용하는 데이터들 저장
 
-    - Worker :  
+    - Worker  
         - Kubelet  
         Agent, API서버로 주기적으로 자기 상태를 보고
         - Kube-Proxy  
@@ -65,28 +66,30 @@ Container를 위한 Open Source Orchestration System
 - Namespace  
 클러스터 내부의 논리적인 분리 단위  
 ```zsh
+# service 정보 조회
 $ kubectl get service -n <namespace>
 ```
 <img src = 'img/01 kube/img6.png'></img>
 
 - Pod
 ```zsh
+# pod 정보 조회
 $ kubectl get pod -n <namespace>
 ```
-<img src = 'img/01 kube/img7.png'></img>
+<img src = 'img/01 kube/img7.png'></img>  
 Kube에서 배포할 수 있는 최소 배포 단위(여러개의 컨테이너가 한 pod안에 떠 있을 수 도 있고, 저장소도 포함될 수 있음)  
 하나의 IP를 공유하며 이를 통해 Pod로 접속후 각각의 Container에 접속가능하다.  
 mortal한 존재 (영구적이지 않음)
 
 - Object Controller
-<img src = 'img/01 kube/img8.png'></img>
+<img src = 'img/01 kube/img8.png'></img>  
 Pod 등의 Resource를 모니터링하여 내가 원하는 상태와 현재 상태를 동일하게 만들어 주기 위한 Object
 
 - Object Controller (Deployment)  
 대표적인 Controller
-<img src = 'img/01 kube/img9.png'></img>
+<img src = 'img/01 kube/img9.png'></img>  
 Deployment를 만들면 ReplicaSet이 자동으로 생성되고 ReplicaSet은 Pod들을 관리한다.
-<img src = 'img/01 kube/img10.png'></img>
+<img src = 'img/01 kube/img10.png'></img>  
 Deployment를 만들 때는, replicaset과 Pod Spec을 담는 Manifest를 정의.  
 
 - Manifest
@@ -103,12 +106,12 @@ Deployment를 만들 때는, replicaset과 Pod Spec을 담는 Manifest를 정의
 
 - Service 종류
     - ClusterIP  
-    <img src = 'img/01 kube/img12.png'></img>
+    <img src = 'img/01 kube/img12.png'></img>  
     내부용으로만 접속  
     클라이언트가 클러스터 내부에 있을 때
 
     - NodePort  
-    <img src = 'img/01 kube/img13.png'></img>
+    <img src = 'img/01 kube/img13.png'></img>  
     노드의 Port 외부 접속  
     Private Node의 특정Port를 열어서 외부와 연결
 
@@ -116,11 +119,11 @@ Deployment를 만들 때는, replicaset과 Pod Spec을 담는 Manifest를 정의
     StatefulSet과 같이 사용
 
     - Loadbalancer(외부)  
-    <img src = 'img/01 kube/img14.png'></img>
+    <img src = 'img/01 kube/img14.png'></img>  
     상용 LB
 
 - ingress 기능  
-<img src = 'img/01 kube/img15.png'></img>
+<img src = 'img/01 kube/img15.png'></img>  
 외부에서 요청이 오면 어떻게 처리할지 규칙
     - SSL 처리
 
